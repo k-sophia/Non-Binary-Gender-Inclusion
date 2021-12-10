@@ -1,0 +1,331 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="creator" lang="en" content="Kelly Camacho" /> 
+    <meta name="subject" lang="en" content="Index" /> 
+    <!-- <meta name="description" lang="en" content="WRITE A DESCRIPTION" />  -->
+    <meta name="keywords" content="DEFINE KEYWORDS OR PHRASES, USE COMMAS TO SEPERATE" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="assets/CSS/Code.css">
+    <link rel="stylesheet" href="assets/CSS/style.css">
+    <title>Non-Binary Gender Inclusion</title>
+  </head>
+
+
+  <body>
+    <div id="background" class="container">
+
+        <h1 id="title">Non-Binary Gender Inclusion</h1>
+
+        <nav class="navbar navbar-expand-lg">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="resources.html">Resources</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="">Code</a>
+            </li>
+        </ul>
+        </nav>
+
+        <div id="label" class="container">
+            <h3>Python Code Used For Data</h3>
+        </div>
+
+        <div id="details" class="container">
+            <p>
+                Python Version: 3.9.6
+            </p>
+            <p>
+                Librarire Used: 
+            </p>
+
+            <ul id="list">
+                <li>
+                    import pandas as pd
+                </li>
+                <li>
+                    import numpy as np
+                </li>
+                <li>
+                    import matplotlib.pyplot as plt
+                </li>
+                <li>
+                    import seaborn as sns
+                </li>
+                <li>
+                    import matplotlib.style as style
+                </li>
+            </ul>
+        </div>
+
+        <pre class="container">
+            <code>
+                import pandas as pd
+                import numpy as np
+                import matplotlib.pyplot as plt
+                import seaborn as sns
+                import matplotlib.style as style
+
+
+                style.use('fivethirtyeight')
+
+
+                #Demographics_by_Borough.csv
+                df1 = pd.read_csv("Demographics_by_Borough.csv")
+
+                Not_Want = ['American Indian or Alaskan Native Count',
+                            'Asian Count',
+                            'Black or African American Count',
+                            'Multi-race Count',
+                            'Native Hawaiian or Other Pacific Islander Count',
+                            'White or Caucasian Count',
+                            'Hispanic or Latinx) Count',
+                            'Not Hispanic or Latinx Count',
+                            'Not Sure Count',
+                            'Do not understand the question Count'
+                            ]
+
+                for col in df1.columns:
+                    if('Count' not in col):
+                        df1 = df1.drop(columns=col)
+                    elif(col in Not_Want):
+                        df1 = df1.drop(columns=col)
+
+                df1_1, df1_2 = np.split(df1, [6], axis=1)
+                df1_1 = df1_1.sum()
+                df1_2 = df1_2.sum()
+
+
+                ax1 = df1_1.plot.bar(y='Gender Identification', rot=0, figsize=(40,18))
+                ax1.axhline(y=0,color = 'black', linewidth=10, alpha=.7)
+                plt.title("NYC OpenData : Social Service Part 1", fontsize = 60)
+                plt.xlabel('Gender Identification', fontsize = 40)
+                plt.ylabel('Population', fontsize = 40)
+                plt.xticks(fontsize = 25)
+                plt.yticks(fontsize = 40)
+                ax1.figure.savefig('Open Data Social Service Part 1')
+
+                ax2 = df1_2.plot.bar(y='Gender Identification', rot=0, figsize=(40,18))
+                ax2.axhline(y=0,color = 'black', linewidth=10, alpha=.7)
+                plt.title("NYC OpenData : Social Service Part 2", fontsize = 60)
+                plt.xlabel('Gender Identification', fontsize = 40)
+                plt.ylabel('Population', fontsize = 40)
+                plt.xticks(fontsize = 20)
+                plt.yticks(fontsize = 40)
+                ax2.figure.savefig('Open Data Social Service Part 2')
+
+
+
+                #Driver_License__Permit__and_Non-Driver_Identification_Cards_Issued_by_County__Age__and_Gender__2011_-_2015.csv
+                df2 = pd.read_csv("Driver_License__Permit__and_Non-Driver_Identification_Cards_Issued_by_County__Age__and_Gender__2011_-_2015.csv")
+                df2 = df2['Sex'].value_counts()
+
+                print('Driver_License')
+                print(df2)
+                print('\n')
+
+                ax3 = df2.plot.bar(y='Gender Identification', rot=0, figsize=(20,10))
+                ax3.axhline(y=0,color = 'black', linewidth=10, alpha=.7)
+                plt.title("Driver License 2011-2015", fontsize = 20)
+                plt.xlabel('Gender Identification', fontsize = 20)
+                plt.ylabel('Population', fontsize = 20)
+                plt.xticks(fontsize = 20)
+                plt.yticks(fontsize = 20)
+                ax3.figure.savefig('Open Data Driver License 2011-2015')
+
+
+
+                #NYPD_Personnel_Demographics.csv
+                df3 = pd.read_csv("NYPD_Personnel_Demographics.csv")
+                df3_1 = df3['Gender'].value_counts()
+                df3_2 = df3['sex'].value_counts()
+
+
+                ax4 = df3_1.plot.bar(y='Gender Identification', rot=0, figsize=(20,10))
+                ax4.axhline(y=0,color = 'black', linewidth=10, alpha=.7)
+                plt.title("NYPD_Personnel_Demographics - Gender", fontsize = 20)
+                plt.xlabel('Gender Identification', fontsize = 20)
+                plt.ylabel('Population', fontsize = 20)
+                plt.xticks(fontsize = 20)
+                plt.yticks(fontsize = 20)
+                ax4.figure.savefig('Open Data NYPD_Personnel_Demographics - Gender')
+
+                ax5 = df3_2.plot.bar(y='Gender Identification', rot=0, figsize=(20,10))
+                ax5.axhline(y=0,color = 'black', linewidth=10, alpha=.7)
+                plt.title("NYPD_Personnel_Demographics - sex", fontsize = 20)
+                plt.xlabel('Gender Identification', fontsize = 20)
+                plt.ylabel('Population', fontsize = 20)
+                plt.xticks(fontsize = 20)
+                plt.yticks(fontsize = 20)
+                ax5.figure.savefig('Open Data NYPD_Personnel_Demographics - sex')
+
+
+
+                #Aggregate_Employee_Statistics.csv
+                df4 = pd.read_csv("Aggregate_Employee_Statistics.csv")
+                df4= df4['GENDER'].value_counts()
+
+                ax6 = df4.plot.bar(y='Gender Identification', rot=0, figsize=(20,10))
+                ax6.axhline(y=0,color = 'black', linewidth=10, alpha=.7)
+                plt.title("Aggregate_Employee_Statistics", fontsize = 20)
+                plt.xlabel('Gender Identification', fontsize = 20)
+                plt.ylabel('Population', fontsize = 20)
+                plt.xticks(fontsize = 20)
+                plt.yticks(fontsize = 20)
+                ax6.figure.savefig('Open Data Aggregate_Employee_Statistics')
+
+
+
+                #Daily_Inmates_In_Custody.csv
+                df5 = pd.read_csv("Daily_Inmates_In_Custody.csv")
+                df5= df5['GENDER'].value_counts()
+
+                ax7 = df5.plot.bar(y='Gender Identification', rot=0, figsize=(20,10))
+                ax7.axhline(y=0,color = 'black', linewidth=10, alpha=.7)
+                plt.title("Daily_Inmates_In_Custody", fontsize = 20)
+                plt.xlabel('Gender Identification', fontsize = 20)
+                plt.ylabel('Population', fontsize = 20)
+                plt.xticks(fontsize = 20)
+                plt.yticks(fontsize = 20)
+                ax7.figure.savefig('Open Data Daily_Inmates_In_Custody')
+
+
+
+                #DOHMH_HIV_AIDS_Annual_Report.csv
+                df6 = pd.read_csv("DOHMH_HIV_AIDS_Annual_Report.csv")
+                df6= df6['Gender'].value_counts()
+
+                ax8 = df6.plot.bar(y='Gender Identification', rot=0, figsize=(20,10))
+                ax8.axhline(y=0,color = 'black', linewidth=10, alpha=.7)
+                plt.title("DOHMH_HIV_AIDS_Annual_Report", fontsize = 20)
+                plt.xlabel('Gender Identification', fontsize = 20)
+                plt.ylabel('Population', fontsize = 20)
+                plt.xticks(fontsize = 20)
+                plt.yticks(fontsize = 20)
+                ax8.figure.savefig('Open Data DOHMH_HIV_AIDS_Annual_Report')
+
+
+
+                #American_Community_Service_Age_And_Sex.csv
+                df7 = pd.read_csv("American_Community_Service_Age_And_Sex.csv")
+                df7 = df7.iloc[0]
+
+                for d in df7.index:
+                    if (('Estimate' not in d) or ('Percent' in d)):
+                        df7 = df7.drop(index=d)
+                        
+                temp = []
+                for d in df7:
+                    add = d.replace(',', '')
+                    temp.append(int(add))
+
+                data = {
+                    'Total': temp[0],
+                    'Male': temp[1],
+                    'Female': temp[2]
+                }
+
+
+                df7 = pd.Series(data)
+
+                ax9 = df7.plot.bar(y='Gender Identification', rot=0, figsize=(20,10))
+                ax9.axhline(y=0,color = 'black', linewidth=10, alpha=.7)
+                plt.title("American_Community_Service_Age_And_Sex.csv", fontsize = 20)
+                plt.xlabel('Gender Identification', fontsize = 20)
+                plt.ylabel('Population', fontsize = 20)
+                plt.xticks(fontsize = 20)
+                plt.yticks(fontsize = 20)
+                ax9.figure.savefig('Open Data American_Community_Service_Age_And_Sex')
+
+
+
+                #Black In Film Database 20.csv
+                df8 = pd.read_csv("Black In Film Database 20.csv")
+                df8_1 = df8['Pronoun'].value_counts()
+                df8_2 = df8['Do you identify as LGBTQ'].value_counts()
+
+
+                ax10 = df8_1.plot.bar(y='Pronoun', rot=0, figsize=(20,10))
+                ax10.axhline(y=0,color = 'black', linewidth=10, alpha=.7)
+                plt.title("NY Black In Film Database - Pronoun", fontsize = 20)
+                plt.xlabel('Pronoun', fontsize = 20)
+                plt.ylabel('Population', fontsize = 20)
+                plt.xticks(fontsize = 20)
+                plt.yticks(fontsize = 20)
+                ax10.figure.savefig('Open Data Black In Film - Pronoun')
+
+
+                ax11 = df8_2.plot.bar(y='LGBTQ', rot=0, figsize=(20,10))
+                ax11.axhline(y=0,color = 'black', linewidth=10, alpha=.7)
+                plt.title("NY Black In Film Database - LGBTQ", fontsize = 20)
+                plt.xlabel('Do you identify as LGBTQ?', fontsize = 20)
+                plt.ylabel('Population', fontsize = 20)
+                plt.xticks(fontsize = 20)
+                plt.yticks(fontsize = 20)
+                ax11.figure.savefig('Open Data Black In Film - LGBTQ')
+
+
+
+                #Make-Music-Equal.csv
+                df9 = pd.read_csv("Make-Music-Equal.csv")
+                df9 = df9[df9['artist_country'] == "US"]
+
+
+                df9 = df9['gender'].value_counts()
+                df9 = pd.DataFrame(df9)
+                df9 = df9.transpose()
+                df9_1, df9_2 = np.split(df9, [5], axis=1)
+                df9_2, df9_3 = np.split(df9_2, [4], axis=1)
+                df9_3, df9_4 = np.split(df9_3, [4], axis=1)
+
+
+                ax12 = df9_1.plot.bar(rot=0, figsize=(15,10))
+                ax12.axhline(y=0,color = 'black', linewidth=10, alpha=.7)
+                plt.title("Make-Music-Equal - Gender 1", fontsize = 20)
+                plt.ylabel('Population', fontsize = 20)
+                plt.xticks(fontsize = 20)
+                plt.yticks(fontsize = 20)
+                ax12.figure.savefig('Make-Music-Equal - Gender 1')
+
+
+                ax13 = df9_2.plot.bar(rot=0, figsize=(15,10))
+                ax13.axhline(y=0,color = 'black', linewidth=10, alpha=.7)
+                plt.title("Make-Music-Equal - Gender 2", fontsize = 20)
+                plt.ylabel('Population', fontsize = 20)
+                plt.xticks(fontsize = 20)
+                plt.yticks(fontsize = 20)
+                ax13.figure.savefig('Make-Music-Equal - Gender 2')
+
+
+                ax14 = df9_3.plot.bar(rot=0, figsize=(15,10))
+                ax14.axhline(y=0,color = 'black', linewidth=10, alpha=.7)
+                plt.title("Make-Music-Equal - Gender 3", fontsize = 20)
+                plt.ylabel('Population', fontsize = 20)
+                plt.xticks(fontsize = 20)
+                plt.yticks(fontsize = 20)
+                ax14.figure.savefig('Make-Music-Equal - Gender 3')
+
+                ax15 = df9_4.plot.bar(rot=0, figsize=(15,10))
+                ax15.axhline(y=0,color = 'black', linewidth=10, alpha=.7)
+                plt.title("Make-Music-Equal - Gender 4", fontsize = 20)
+                plt.ylabel('Population', fontsize = 20)
+                plt.xticks(fontsize = 20)
+                plt.yticks(fontsize = 20)
+                ax15.figure.savefig('Make-Music-Equal - Gender 4')
+            </code>
+        </pre>
+    </div>
+
+  </body>
+</html>
