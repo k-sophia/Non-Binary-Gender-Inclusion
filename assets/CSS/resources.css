@@ -1,0 +1,19 @@
+#label {
+    text-align: center;
+}
+
+.link-item {
+    list-style-type: none;
+}
+
+
+.link-item a {
+	color: #c2d0f2;
+}
+
+.link-item a:hover {
+	color: #faf3dd; 
+	font: bold;
+	text-shadow: 0px 0px 10px #000000;
+
+}

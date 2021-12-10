@@ -1,0 +1,94 @@
+#front-img {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 30px;
+}
+
+#gender-img img {
+    max-width: 800px;
+    height: auto;
+}
+
+.sect {
+    padding-top: 50px;
+}
+
+.desc {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#non-binary-desc {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#gender-examples img {
+    max-width: 500px;
+}
+
+.ss-cat {
+    text-align: center;
+}
+
+#NYCOpenData {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.dataAndCode {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 5px;
+    padding-bottom: 15px;
+}
+
+.data img {
+    max-width: 500px;
+    height: auto;
+}
+
+.code {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.code img {
+    max-width: 500px;
+    height: auto;
+}
+
+.data_limit img{
+    max-width: 500px;
+    height: auto;
+    padding: 10px;
+}
+
+.break {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.break-desc1 p {
+    padding-left: 15px;
+}
+
+.break-img img{
+    max-width: 250px;
+    height: auto;
+}
+
+.break-img1 img{
+    max-width: 300px;
+    height: auto;
+}
+
+.other-title{
+    text-align: center;
+}
